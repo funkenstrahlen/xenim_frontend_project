@@ -1,0 +1,53 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+	<title>{% trans "Content moved" %}</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta http-equiv="refresh" content="10; URL={{ url }}">
+	<style type="text/css">
+		html,body,div {
+			height: 100%;
+			width: 100%;
+			margin: 0px;
+			padding: 0px;
+			display: table;
+		}
+		#inner {
+			display: table-cell;
+			text-align: center;
+			vertical-align: middle;
+		}
+                #box { 
+                       width: 40em;
+                       display: block;
+                       height: initial;
+                       border: 10px solid red;
+                       margin: 0 auto;
+                       padding: 1em;
+                       font-family: sans-serif;
+                       position: relative;
+                       top: -10%;
+                }
+		h1,p {
+			padding: 0px;
+			margin: 0px;
+		}
+/*		p {
+			position: relative;
+			top: -1.5em;
+		}
+		h1 {
+			/* font-size: 10em; */
+		}*/
+	</style>
+<style type="text/css"></style></head>
+<body>
+	<div id="inner">
+<div id="box">
+  <h1>{% trans "Content moved" %}</h1>
+  <p>{% blocktrans %}
+    The content of this page has moved to the url <a href="{{ url }}">{{ url }}</a>. Please update your references to this page.
+    You will be redirected to this page in 10 seconds.
+  {% endblocktrans %}</p>
+  </div></div>
+</body></html>

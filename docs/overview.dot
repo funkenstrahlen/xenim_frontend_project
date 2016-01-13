@@ -1,0 +1,16 @@
+graph xenim {
+start -- nginx;
+
+subgraph frontend {
+nginx -- www;
+nginx -- feeds;
+nginx -- dashboard;
+nginx -- review;
+nginx -- shorturl;
+www -- postgres;
+feeds -- postgres;
+dashboard -- postgres;
+review -- postgres;
+shorturl -- postgres;
+}
+}

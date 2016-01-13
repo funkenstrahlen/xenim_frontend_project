@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block shorturl %}{% endblock %}
+{% block content %}
+<h2>{% trans "Well, you found the only bug hidden in the app." %}</h2>
+<p>{% trans "The technician has been notified." %}{% if request.sentry.id %} {% blocktrans with id=request.sentry.id %}If you need further information, mention {{ id }} as error reference{% endblocktrans %}{% endif %}</p>
+{% endblock %}

@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-06 08:22+0100\n"
+"PO-Revision-Date: 2015-11-06 08:25+0100\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.4\n"
+
+#: cron.py:35
+msgid "[xenim] Some planned episodes expired"
+msgstr "[xenim] Einige geplante Folgen sind veraltet"
+
+#: templates/403.html:4
+msgid "Forbidden"
+msgstr ""
+
+#: templates/403.html:5
+msgid "You are not allowed to access this page."
+msgstr "Sie sind nicht berechtigt diese Seite zu sehen"
+
+#: templates/404.html:4
+msgid "Not Found"
+msgstr "Nicht gefunden"
+
+#: templates/404.html:5
+msgid "There is no page at this address."
+msgstr "Unter dieser Adresse gibt es keine Seite"
+
+#: templates/500.html:5
+msgid "Well, you found the only bug hidden in the app."
+msgstr ""
+"Du hast den einzigen Bug, der sich in der Webseite versteckt hat, "
+"gefunden!"
+
+#: templates/500.html:6
+msgid "The technician has been notified."
+msgstr "Der Techniker wurde informiert."
+
+#: templates/500.html:6
+#, python-format
+msgid "If you need further information, mention %(id)s as error reference"
+msgstr "Bei weiteren Nachfragen bitte %(id)s als Fehlerreferenz angeben."
+
+#: templates/base.html:36
+msgid "You are logged in as"
+msgstr "Eingeloggt als"
+
+#: templates/base.html:44
+msgid "Home"
+msgstr ""
+
+#: templates/base.html:49
+msgid "News"
+msgstr ""
+
+#: templates/base.html:52
+msgid "About"
+msgstr "Über"
+
+#: templates/redirect.html:4 templates/redirect.html.py:47
+msgid "Content moved"
+msgstr ""
+
+#: templates/redirect.html:48
+#, python-format
+msgid ""
+"\n"
+"    The content of this page has moved to the url <a href=\"%(url)s\">"
+"%(url)s</a>. Please update your references to this page.\n"
+"    You will be redirected to this page in 10 seconds.\n"
+"  "
+msgstr ""
+
+#~ msgid "Internal Error"
+#~ msgstr "Interner Fehler"
+
+#~ msgid "Sorry, something went wrong here"
+#~ msgstr "Irgendwas ist hier schiefgelaufen."
+
+#~ msgid "Recent revisions"
+#~ msgstr "Letzte Änderungen"
+
+#~ msgid "All Pages"
+#~ msgstr "Alle Seiten"
+
+#~ msgid "Short URL"
+#~ msgstr "KurzURL"

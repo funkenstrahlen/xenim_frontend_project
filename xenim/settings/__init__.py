@@ -1,0 +1,227 @@
+from configurations import Settings
+
+try:
+    from amqp_local import Amqp
+except ImportError:
+    from amqp import Amqp
+
+try:
+    from social_local import Social
+except ImportError:
+    from social import Social
+
+try:
+    from base_local import Base
+except ImportError:
+    from base import Base
+
+try:
+    from database_ro_local import ReadOnlyDatabase
+except ImportError:
+    from database_ro import ReadOnlyDatabase
+
+try:
+    from database_rw_local import ReadWriteDatabase
+except ImportError:
+    from database_rw import ReadWriteDatabase
+
+try:
+    from debugtoolbar_local import DebugToolBar
+except ImportError:
+    from debugtoolbar import DebugToolBar
+
+try:
+    from download_local import Download
+except ImportError:
+    from download import Download
+
+try:
+    from logging_local import Logging
+except ImportError:
+    from logging import Logging
+
+try:
+    from paths_local import Paths
+except ImportError:
+    from paths import Paths
+
+try:
+    from shorturl_local import ShortURLs
+except ImportError:
+    from shorturl import ShortURLs
+
+try:
+    from south_settings_local import SouthSettings
+except ImportError:
+    from south_settings import SouthSettings
+
+try:
+    from revision_local import Revision
+except ImportError:
+    from revision import Revision
+
+try:
+    from review_local import ReviewSett
+except ImportError:
+    from review import ReviewSett
+
+try:
+    from tastypie_local import Tastypie
+except ImportError:
+    from tastypie import Tastypie
+
+# Configuration is splitted up in several classes, which acts as "mixins" to form the final config.
+# See example.py and example_local.py for a hint on how this classes look like
+
+from deployment import phase
+
+class DashboardSettings(Social, Tastypie, Revision, Amqp, ReadWriteDatabase, Download, Logging, Paths, ShortURLs, Base, Settings):
+
+    @property
+    def INSTALLED_APPS(self):
+        return super(DashboardSettings, self).INSTALLED_APPS + (
+            #'radioportal_control',
+            'radioportal_archive',
+            'radioportal_news',
+            'django_extensions',
+            'external_auth',
+            'markitup',
+        )
+
+    MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True})
+    MARKITUP_SET = 'markitup/sets/markdown'
+    # MARKITUP_SKIN = 'markitup/skins/markitup'
+
+    DEFAULT_HOST = 'dashboard'
+
+    ROOT_URLCONF = 'xenim.urls.dashboard'
+
+    MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True})
+
+    DEBUG = False
+    TEMPLATE_DEBUG = False
+
+    SITE_ID = 6
+
+    ALLOWED_HOSTS = ["dashboard.%sxenim.de" % phase,]
+
+
+class WWWSettings(ReadOnlyDatabase, Logging, Paths, ShortURLs, Base, Settings):
+
+    DEFAULT_HOST = 'www'
+
+    ROOT_URLCONF = 'xenim.urls.www'
+
+    DEBUG = False
+    TEMPLATE_DEBUG = False
+
+    @property
+    def INSTALLED_APPS(self):
+        return super(WWWSettings, self).INSTALLED_APPS + (
+            'radioportal_news',
+            'django_markup',
+        )
+
+    SITE_ID = 1
+
+    AMQP = False
+
+    ALLOWED_HOSTS = ["streams.%sxenim.de" % phase, "*"]
+
+class FeedsSettings(ReadOnlyDatabase, Logging, Paths, ShortURLs, Base, Settings):
+
+    AMQP = False
+
+    DEFAULT_HOST = 'feeds'
+
+    ROOT_URLCONF = 'xenim.urls.feeds'
+
+    DEBUG = False
+    TEMPLATE_DEBUG = False
+
+    SITE_ID = 5
+
+    ALLOWED_HOSTS = ["feeds.streams.%sxenim.de" % phase,]
+
+class ReviewSettings(Tastypie, ReviewSett, ReadWriteDatabase, Logging, Paths, ShortURLs, Base, Settings):
+
+    AMQP = False
+
+    DEFAULT_HOST = 'review'
+
+    ROOT_URLCONF = 'xenim.urls.review'
+
+    DEBUG = True
+    TEMPLATE_DEBUG = True
+
+    LOGIN_URL = 'https://dashboard.xenim.de/accounts/login/'
+
+    REVIEW_RECEIVER = 'info@streams.xenim.de'
+    REVIEW_MAILINGLIST = 'stream-orga@streams.xenim.de'
+    REVIEW_MAILINGLIST_SENDER = 'noreply@streams.xenim.de'
+
+    @property
+    def INSTALLED_APPS(self):
+        return super(ReviewSettings, self).INSTALLED_APPS + (
+            'django_markup',
+            'markitup',
+        )
+
+
+    SITE_ID = 7
+
+    ALLOWED_HOSTS = ["review.streams.%sxenim.de" % phase,]
+
+    JQUERY_URL = 'jquery-1.6.2.min.js'
+    MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True})
+    MARKITUP_SET = 'markitup/sets/markdown'
+    # MARKITUP_SKIN = 'markitup/skins/markitup'
+
+
+class ShorturlSettings(ReadOnlyDatabase, Logging, Paths, ShortURLs, Base, Settings):
+
+    DEFAULT_HOST = 'shorturl'
+    ROOT_URLCONF = 'xenim.urls.shorturl'
+
+    DEBUG = False
+    TEMPLATE_DEBUG = False
+
+    AMQP = False
+
+    SITE_ID = 4
+
+    ALLOWED_HOSTS = ["%sxenim.de" % phase, "%sxsn.io" % phase, "%sxn--m-6na.de" % phase]
+
+class DevSettingsMixin(object):
+    DEBUG = True
+    TEMPLATE_DEBUG = True
+
+    MEDIA_URL = "/media/"
+    STATIC_URL = "/static/"
+
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+    SESSION_COOKIE_DOMAIN = ''
+
+    AMQP = False
+
+    ROOT_HOSTCONF = 'xenim.hosts'
+
+    INTERNAL_IPS = ('127.0.0.1',)
+
+    ALLOWED_HOSTS = ['*',]
+
+class DevDashboardSettings(DevSettingsMixin, DebugToolBar, DashboardSettings):
+    pass
+
+class DevWWWSettings(DevSettingsMixin, WWWSettings):
+    pass
+
+class DevFeedsSettings(DevSettingsMixin, FeedsSettings):
+    pass
+
+class DevReviewSettings(DevSettingsMixin, ReviewSettings):
+    pass
+
+class DevShorturlSettings(DevSettingsMixin, ShorturlSettings):
+    pass

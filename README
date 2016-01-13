@@ -1,0 +1,28 @@
+Quickstart
+==========
+
+Install all necessary packages and headers, for Debian this should be sufficient:
+
+    apt-get install libxml2-dev libxslt1-dev zlib1g-dev build-essential python-dev libssl1.0.0 libffi-dev libssl-dev python-psycopg2 libpq-dev python-virtualenv libjpeg-dev zlib1g-dev
+
+Then install everything with:
+
+    mkdir storedir
+    cd storedir
+    virtualenv venv
+    . venv/bin/activate
+    git clone git@github.com:xenim/xenim_frontend_project.git
+    cd xenim_frontend_project
+    pip install -r requirements-dev.txt
+
+Configuration
+-------------
+
+Settings are stored in classes in settings/. See settings/example_local.py on how 
+add local settings (databases, etc). For a start it is needed to create base_local.py
+and configure SECRET_KEY.
+
+Run with integrated webserver
+-----------------------------
+
+    python manage.py runserver --configuration=DevWWWSettings

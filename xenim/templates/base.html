@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+{% load cache i18n extshorturl_tags hosts staticfiles hijack_tags %}
+  <head>
+    <title>streams.xenim.de{% block title %}{% endblock %}</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <link rel="icon" href="{% static "design/favicon.png" %}" type="image/png" />
+    <link rel="apple-touch-icon" href="{% static "design/favicon.png" %}" />
+    {% if not is_canonical %}<link rel="canonical" href="{{ canonical }}" />{% endif %}
+    {% block head %}{% endblock %}
+    {% block shorturl_head %}<link rev="canonical" href="{% extshorturl %}" />{% endblock %}
+    {% block head_css %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static "design/main.css" %}" />
+{% if phase %}
+<style>
+body, html {
+background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='80px' width='160px'><text x='0' y='80' fill='white' background='transparent' font-size='25' font-family='sans' font-weight='bold' transform='rotate(-30)'>staging</text></svg>");
+}
+</style>
+{% endif %}
+
+    {% block head_js %}{% endblock %}
+  </head>
+  <body>
+{{ request|hijackNotification }}
+{% block messages %}{% endblock %}
+    <div id="headline">
+      <h1>xenim streaming network</h1>
+    <span id="twitter" style="position: absolute; top: 0.5em; right: 1em;">
+    	<a href="http://twitter.com/xenim">
+    		<img src="{% static "design/twitter.png" %}" alt="twitter bird" />
+    	</a>
+    </span>
+{% if user.is_authenticated %}
+	<span id="loggedin" style="position: absolute; top: 0.5em; left: 1em; width: 5em; line-height: 1.5em;">
+		{% trans "You are logged in as" %} <a href="{% host_url "dashboard" on "dashboard" %}">{{ user }}</a>
+	</span>
+{% endif %}
+    </div>
+    <div id="navigation">
+	    <ul>
+                {% host_url "root" on "www" as root_var %}
+	        <li{% ifequal request.path root_var %} class="active"{% endifequal %}>
+		          <a href="{{ root_var }}">{% trans "Home" %}</a>
+	        </li>
+	        {% block navigation %}{% endblock %}
+                {% host_url "news-list" on "www" as news_var %}
+	        <li{% ifequal request.path news_var %} class="active"{% endifequal %}>
+		          <a href="{{ news_var }}">{% trans "News" %}</a>
+	        </li>
+	        <li{% ifequal request.path "/about/" %} class="active"{% endifequal %}>
+	          <a href="/about/">{% trans "About" %}</a>
+	        </li>	        
+			{% if user.is_authenticated %}
+			<li>
+				<a href="{% host_url "wiki-page" page="start" on "wiki" %}">Wiki</a>
+			</li>
+			{% endif %}
+	    </ul>
+    </div>
+    <div id="content" {% block content_class %}{% endblock %}>
+	  {% block breadcrumb_div %}
+	  <div id="sub_navigation">
+      <div id="breadcrumb">
+         {% block breadcrumb %}{% endblock %}
+      </div>
+   	  <div id="shorturl">{% block shorturl_footer %}{% extshorturl %}{% endblock %}</div>
+      <span class="clear" />
+      </div>
+	  {% endblock %}
+      {% block content %}{% endblock %}
+      {% block content_foot %}{% endblock %}
+    </div>
+
+	<div id="footer">
+		<ul>
+			{% if user.is_staff %}
+			<li><a href="{% host_url "admin:index" on "dashboard" %}">Django Admin</a></li>
+			{% endif %}
+			<li>
+				{% if user.is_authenticated %}
+				<a href="{% host_url "logout" on "dashboard" %}">Logout ({{ user.username }})</a>
+				{% else %}
+				<a href="{% host_url "login" on "dashboard" %}">Login</a>
+				{% endif %}			
+			</li>
+			{% block feed_footer %}{% endblock %}
+                        <li><a href="http://status.xenim.de/">Status</a></li>
+                        <li><a href="/impressum/">Impressum</a></li>
+                        <li><a href="http://flattr.com/thing/2852/xenim-streaming" target="_blank"><img src="{% static "design/flattr-badge-large.png" %}" alt="Flattr this" title="Flattr this" border="0" /></a></li>
+		</ul>
+	</div>
+
+  </body>
+</html>

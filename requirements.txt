@@ -1,0 +1,11 @@
+--extra-index-url https://build.xnis.de/pypi/robert/xenim/+simple/
+-r requirements-common.txt
+django-radioportal
+django-shorturls-external
+django-radioportal-archive
+django-radioportal-news
+django-external-auth
+django-radioportal-review
+django-extensions==1.5.5
+django-polymorphic==0.7.1
+django-hijack==1.0.9

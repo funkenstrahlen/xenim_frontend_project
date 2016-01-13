@@ -1,0 +1,32 @@
+digraph G {
+"Podcaster" -> "enters in Dashboard" 
+"enters in Dashboard" -> "UPCOMING" [label="create"]
+"iCal Updater" -> "created by regularily fetching iCal-Feed" 
+"created by regularily fetching iCal-Feed"-> "UPCOMING" [label="create"]
+"UPCOMING" -> "Stream start (1)" -> "RUNNING"
+"RUNNING" -> "Stream stop" -> "ARCHIVED"
+"ARCHIVED" -> "Stream start (2)" -> "RUNNING"
+"EXPIRED" -> "Stream start (4)" -> "RUNNING"
+"UPCOMING" -> "Automatic archiving 2 days after planned start" -> "EXPIRED"
+"UPCOMING" -> "by Podcaster in dashboard (1)" -> "ARCHIVED"
+"ARCHIVED" -> "by Podcaster in dashboard (2)" -> "UPCOMING"
+"EXPIRED" -> "by Podcaster in dashboard (3)" -> "ARCHIVED"
+"EXPIRED" -> "by Podcaster in dashboard (4)" -> "UPCOMING"
+"Stream start (3)" -> "RUNNING" [label="create"]
+"ARCHIVED" [shape=box]
+"RUNNING" [shape=box]
+"UPCOMING" [shape=box]
+"EXPIRED" [shape=box]
+"enters in Dashboard" [shape=polygon,sides=8]
+"created by regularily fetching iCal-Feed" [shape=polygon,sides=8]
+"Stream start (1)" [shape=polygon,sides=8]
+"Stream stop" [shape=polygon,sides=8]
+"Stream start (2)" [shape=polygon,sides=8]
+"Stream start (3)" [shape=polygon,sides=8]
+"Automatic archiving 2 days after planned start" [shape=polygon,sides=8]
+"Stream start (4)" [shape=polygon,sides=8]
+"by Podcaster in dashboard (1)" [shape=polygon,sides=8]
+"by Podcaster in dashboard (2)"  [shape=polygon,sides=8]
+"by Podcaster in dashboard (3)"  [shape=polygon,sides=8]
+"by Podcaster in dashboard (4)"  [shape=polygon,sides=8]
+}

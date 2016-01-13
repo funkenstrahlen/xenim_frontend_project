@@ -1,0 +1,13 @@
+Hallo {{ username }},
+
+beim Durchlauf des automatischen Reinigungsskriptes wurde festgestellt, dass
+der Startzeitpunkt einiger geplanter Folgen in der Vergangenheit liegt. Einige
+geplante Folgen haben also nicht stattgefunden. Diese Folgen wurden auf den Status
+"abgelaufen" gesetzt. Wenn dies nicht korrekt ist, dann ändere dies bitte im Web-
+interface. Diese Folgen sind davon betroffen:
+
+{% for s, episodes in shows.iteritems %}Von der Sendung {{ s.name }}:
+{% for e in episodes %}  - http:{{ e.get_absolute_url }}
+{% endfor %}
+{% endfor %}
+Grüße vom xenim Reinigungsroboter
