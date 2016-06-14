@@ -13,7 +13,8 @@ class SentryCfg(object):
 
     @property
     def LOGGING_LOGGERS(self):
-        return super(SentryCfg, self).LOGGING_LOGGERS += {
+        loggers = super(SentryCfg, self).LOGGING_LOGGERS
+        loggers.update({
             'raven': {
                 'level': 'DEBUG',
                 'handlers': ['console'],
@@ -24,7 +25,8 @@ class SentryCfg(object):
                 'handlers': ['console'],
                 'propagate': False,
             }
-        }
+        })
+        return loggers
 
     @property
     def INSTALLED_APPS(self):

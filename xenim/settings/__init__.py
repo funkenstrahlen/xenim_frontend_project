@@ -41,6 +41,11 @@ except ImportError:
     from logging_cfg import Logging
 
 try:
+    from sentry_local import SentryCfg
+except ImportError:
+    from sentry import SentryCfg
+
+try:
     from paths_local import Paths
 except ImportError:
     from paths import Paths
@@ -70,11 +75,11 @@ except ImportError:
 
 from deployment import phase
 
-class DashboardSettings(Social, Tastypie, Revision, Amqp, ReadWriteDatabase, Download, Logging, Paths, ShortURLs, Base, Settings):
+class DashboardSettingsBase(Social, Tastypie, Revision, ReadWriteDatabase, Download, Logging, Paths, ShortURLs, Base, Settings):
 
     @property
     def INSTALLED_APPS(self):
-        return super(DashboardSettings, self).INSTALLED_APPS + (
+        return super(DashboardSettingsBase, self).INSTALLED_APPS + (
             #'radioportal_control',
             'radioportal_archive',
             'radioportal_news',
@@ -101,7 +106,7 @@ class DashboardSettings(Social, Tastypie, Revision, Amqp, ReadWriteDatabase, Dow
     ALLOWED_HOSTS = ["dashboard.%sxenim.de" % phase,]
 
 
-class WWWSettings(ReadOnlyDatabase, Logging, Paths, ShortURLs, Base, Settings):
+class WWWSettingsBase(ReadOnlyDatabase, Logging, Paths, ShortURLs, Base, Settings):
 
     DEFAULT_HOST = 'www'
 
@@ -112,7 +117,7 @@ class WWWSettings(ReadOnlyDatabase, Logging, Paths, ShortURLs, Base, Settings):
 
     @property
     def INSTALLED_APPS(self):
-        return super(WWWSettings, self).INSTALLED_APPS + (
+        return super(WWWSettingsBase, self).INSTALLED_APPS + (
             'radioportal_news',
             'django_markup',
         )
@@ -123,7 +128,7 @@ class WWWSettings(ReadOnlyDatabase, Logging, Paths, ShortURLs, Base, Settings):
 
     ALLOWED_HOSTS = ["streams.%sxenim.de" % phase, "*"]
 
-class FeedsSettings(ReadOnlyDatabase, Logging, Paths, ShortURLs, Base, Settings):
+class FeedsSettingsBase(ReadOnlyDatabase, Logging, Paths, ShortURLs, Base, Settings):
 
     AMQP = False
 
@@ -142,7 +147,7 @@ class FeedsSettings(ReadOnlyDatabase, Logging, Paths, ShortURLs, Base, Settings)
 
     @property
     def INSTALLED_APPS(self):
-        return super(FeedsSettings, self).INSTALLED_APPS + (
+        return super(FeedsSettingsBase, self).INSTALLED_APPS + (
             'tastypie',
             'django_extensions',
         )
@@ -151,7 +156,7 @@ class FeedsSettings(ReadOnlyDatabase, Logging, Paths, ShortURLs, Base, Settings)
 
     ALLOWED_HOSTS = ["feeds.streams.%sxenim.de" % phase,]
 
-class ReviewSettings(Tastypie, ReviewSett, ReadWriteDatabase, Logging, Paths, ShortURLs, Base, Settings):
+class ReviewSettingsBase(Tastypie, ReviewSett, ReadWriteDatabase, Logging, Paths, ShortURLs, Base, Settings):
 
     AMQP = False
 
@@ -170,7 +175,7 @@ class ReviewSettings(Tastypie, ReviewSett, ReadWriteDatabase, Logging, Paths, Sh
 
     @property
     def INSTALLED_APPS(self):
-        return super(ReviewSettings, self).INSTALLED_APPS + (
+        return super(ReviewSettingsBase, self).INSTALLED_APPS + (
             'django_markup',
             'markitup',
         )
@@ -186,7 +191,7 @@ class ReviewSettings(Tastypie, ReviewSett, ReadWriteDatabase, Logging, Paths, Sh
     # MARKITUP_SKIN = 'markitup/skins/markitup'
 
 
-class ShorturlSettings(ReadOnlyDatabase, Logging, Paths, ShortURLs, Base, Settings):
+class ShorturlSettingsBase(ReadOnlyDatabase, Logging, Paths, ShortURLs, Base, Settings):
 
     DEFAULT_HOST = 'shorturl'
     ROOT_URLCONF = 'xenim.urls.shorturl'
@@ -199,6 +204,11 @@ class ShorturlSettings(ReadOnlyDatabase, Logging, Paths, ShortURLs, Base, Settin
     SITE_ID = 4
 
     ALLOWED_HOSTS = ["%sxenim.de" % phase, "%sxsn.io" % phase, "%sxn--m-6na.de" % phase]
+
+
+class ProdSettingsMixin(SentryCfg, Amqp, object):
+    pass
+
 
 class DevSettingsMixin(object):
     DEBUG = True
@@ -217,17 +227,35 @@ class DevSettingsMixin(object):
 
     ALLOWED_HOSTS = ['*',]
 
-class DevDashboardSettings(DevSettingsMixin, DebugToolBar, DashboardSettings):
+    SESSION_COOKIE_DOMAIN = ''
+
+class DevDashboardSettings(DevSettingsMixin, DebugToolBar, DashboardSettingsBase):
     pass
 
-class DevWWWSettings(DevSettingsMixin, WWWSettings):
+class DevWWWSettings(DevSettingsMixin, WWWSettingsBase):
     pass
 
-class DevFeedsSettings(DevSettingsMixin, FeedsSettings):
+class DevFeedsSettings(DevSettingsMixin, FeedsSettingsBase):
     pass
 
-class DevReviewSettings(DevSettingsMixin, ReviewSettings):
+class DevReviewSettings(DevSettingsMixin, ReviewSettingsBase):
     pass
 
-class DevShorturlSettings(DevSettingsMixin, ShorturlSettings):
+class DevShorturlSettings(DevSettingsMixin, ShorturlSettingsBase):
+    pass
+
+
+class DashboardSettings(ProdSettingsMixin, DashboardSettingsBase):
+    pass
+
+class WWWSettings(ProdSettingsMixin, WWWSettingsBase):
+    pass
+
+class FeedsSettings(ProdSettingsMixin, FeedsSettingsBase):
+    pass
+
+class ReviewSettings(ProdSettingsMixin, ReviewSettingsBase):
+    pass
+
+class ShorturlSettings(ProdSettingsMixin, ShorturlSettingsBase):
     pass
