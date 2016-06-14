@@ -134,6 +134,19 @@ class FeedsSettings(ReadOnlyDatabase, Logging, Paths, ShortURLs, Base, Settings)
     DEBUG = False
     TEMPLATE_DEBUG = False
 
+    API_LIMIT_PER_PAGE = 0
+
+    TASTYPIE_DEFAULT_FORMATS = ['json',]
+    HOST_SCHEME = 'http://'
+    MEDIA_URL = 'http://media.streams.%sxenim.de/' % phase
+
+    @property
+    def INSTALLED_APPS(self):
+        return super(FeedsSettings, self).INSTALLED_APPS + (
+            'tastypie',
+            'django_extensions',
+        )
+
     SITE_ID = 5
 
     ALLOWED_HOSTS = ["feeds.streams.%sxenim.de" % phase,]

@@ -18,3 +18,6 @@ class Social(object):
     TWITTER_CONSUMER_KEY = "**CHANGEME**"
     TWITTER_CONSUMER_SECRET = "**CHANGEME**"
 
+    PUSH_URL = ()
+    PUSH_APPLICATION_ID = "**CHANGEME**"
+    PUSH_MASTER_KEY = "**CHANGEME**"

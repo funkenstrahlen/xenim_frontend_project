@@ -126,3 +126,31 @@ class Base(object):
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
     USE_X_FORWARDED_HOST = True
+
+    THUMBNAIL_NAMER = 'easy_thumbnails.namers.source_hashed'
+
+    THUMBNAIL_ALIASES = {
+        '': {
+            'app-1x': {
+                'size': (60, 60),
+                'crop': 'smart',
+            },
+            'app-2x': {
+                'size': (120, 120),
+                'crop': 'smart',
+            },
+            'app-3x': {
+                'size': (180, 180),
+                'crop': 'smart',
+            },
+            'listing': {
+                'size': (100, 100),
+                'crop': 'smart',
+            },
+            'detail':{
+                'size': (150, 150),
+                'crop': 'smart',
+            },
+        }
+    }
+    THUMBNAIL_CACHE_DIMENSIONS = True
