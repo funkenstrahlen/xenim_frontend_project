@@ -211,7 +211,7 @@ class DevSettingsMixin(object):
 
     AMQP = False
 
-    ROOT_HOSTCONF = 'xenim.hosts'
+    ROOT_HOSTCONF = 'xenim.hosts_dev'
 
     INTERNAL_IPS = ('127.0.0.1',)
 
