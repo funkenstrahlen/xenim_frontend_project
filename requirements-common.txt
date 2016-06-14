@@ -1,6 +1,6 @@
 --extra-index-url https://build.xnis.de/pypi/robert/xenim/+simple/
 Django==1.8.3
-django-configurations==0.8+pre0.9
+django-configurations==1.0
 django-hosts==1.2
 django-autoslug==1.8.0
 translitcodec==0.4.0
