@@ -51,11 +51,6 @@ except ImportError:
     from shorturl import ShortURLs
 
 try:
-    from south_settings_local import SouthSettings
-except ImportError:
-    from south_settings import SouthSettings
-
-try:
     from revision_local import Revision
 except ImportError:
     from revision import Revision
