@@ -14,15 +14,19 @@ Then install everything with:
     git clone git@github.com:xenim/xenim_frontend_project.git
     cd xenim_frontend_project
     pip install -r requirements-dev.txt
+    python manage.py initconfig
 
 Configuration
 -------------
 
-Settings are stored in classes in settings/. See settings/example_local.py on how 
-add local settings (databases, etc). For a start it is needed to create base_local.py
-and configure SECRET_KEY.
+Settings are stored in classes in settings/. See settings/example_local.py on how to
+add local settings (databases, etc).
 
 Run with integrated webserver
 -----------------------------
 
-    python manage.py runserver --configuration=DevWWWSettings
+    python manage.py runserver --configuration=DevWWWSettings 8000
+    python manage.py runserver --configuration=DevDashboardSettings 8001
+    python manage.py runserver --configuration=DevFeedsSettings 8002
+
+
