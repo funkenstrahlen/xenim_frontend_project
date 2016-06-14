@@ -1,8 +1,8 @@
 -r ./requirements-common.txt
--e git+git@github.com:xenim/django-radioportal@develop#egg=django-radioportal
--e git+git@github.com:xenim/django-shorturls-external@develop#egg=django-shorturls-external
--e git+git@github.com:xenim/django-radioportal-archive@develop#egg=django-radioportal-archive
--e git+git@github.com:xenim/django-radioportal-news@develop#egg=django-radioportal-news
--e git+git@github.com:xenim/django-external-auth@develop#egg=django-external-auth
--e git+git@github.com:xenim/django-radioportal-review@develop#egg=django-radioportal-review
+-e git+git@github.com:xenim/django-radioportal#egg=django-radioportal
+-e git+git@github.com:xenim/django-shorturls-external#egg=django-shorturls-external
+-e git+git@github.com:xenim/django-radioportal-archive#egg=django-radioportal-archive
+-e git+git@github.com:xenim/django-radioportal-news#egg=django-radioportal-news
+-e git+git@github.com:xenim/django-external-auth#egg=django-external-auth
+-e git+git@github.com:xenim/django-radioportal-review#egg=django-radioportal-review
 
