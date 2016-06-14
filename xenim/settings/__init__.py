@@ -36,9 +36,9 @@ except ImportError:
     from download import Download
 
 try:
-    from logging_local import Logging
+    from logging_cfg_local import Logging
 except ImportError:
-    from logging import Logging
+    from logging_cfg import Logging
 
 try:
     from paths_local import Paths

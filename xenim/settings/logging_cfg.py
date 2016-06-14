@@ -1,28 +1,41 @@
-import os
-import raven
+import logging.config
 
 from deployment import phase
 
 class Logging(object):
-    LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': True,
-        'formatters': {
-            'verbose': {
-                'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-            },
-            'simple': {
-                'format': '%(levelname)s %(message)s'
-            },
+    def make_logging(self):
+        cfg = {
+            'version': 1,
+            'disable_existing_loggers': True,
+            'formatters': self.LOGGING_FORMATTERS,
+            'handlers': self.LOGGING_HANDLERS,
+            'loggers': self.LOGGING_LOGGERS,
+        }
+        return logging.config.dictConfig(cfg)
+
+    @property
+    def LOGGING_CONFIG(self):
+        return self.make_logging
+
+    LOGGING_FORMATTERS = {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
         },
-        'handlers': {
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    }
+    
+    @property
+    def LOGGING_HANDLERS(self):
+        return {
             'null': {
                 'level': 'DEBUG',
                 'class': 'django.utils.log.NullHandler',
             },
             'sentry': {
                 'level': 'ERROR',
-                'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+                'class': 'django.utils.log.NullHandler',
             },
             'console': {
                 'level': 'INFO',
@@ -33,8 +46,11 @@ class Logging(object):
                 'level': 'ERROR',
                 'class': 'django.utils.log.AdminEmailHandler',
             }
-        },
-        'loggers': {
+        }
+
+    @property
+    def LOGGING_LOGGERS(self):
+        return {
             'django': {
                 'handlers': ['null'],
                 'propagate': True,
@@ -49,18 +65,7 @@ class Logging(object):
                 'handlers': ['sentry', 'console', 'mail_admins'],
                 'level': 'INFO',
             },
-            'raven': {
-                'level': 'DEBUG',
-                'handlers': ['console'],
-                'propagate': False,
-            },
-            'sentry.errors': {
-                'level': 'DEBUG',
-                'handlers': ['console'],
-                'propagate': False,
-            },
         }
-    }
 
     SERVER_EMAIL = '**CHANGEME**'
     DEFAULT_FROM_EMAIL = '**CHANGEME**'
@@ -76,22 +81,3 @@ class Logging(object):
     )
 
     MANAGERS = ADMINS
-
-    @property
-    def INSTALLED_APPS(self):
-        return super(Logging, self).INSTALLED_APPS + (
-            'raven.contrib.django.raven_compat',
-        )
-
-    @property
-    def MIDDLEWARE_CLASSES(self):
-        return super(Logging, self).MIDDLEWARE_CLASSES + (
-            'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
-        )
-
-    RAVEN_CONFIG = {
-        'dsn': '**CHANGEME**',
-        # If you are using git, you can also automatically configure the
-        # release based on the git info.
-        'release': raven.fetch_git_sha(os.path.join(os.path.dirname(__file__), "..", "..")),
-    }
