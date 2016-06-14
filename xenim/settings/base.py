@@ -90,6 +90,7 @@ class Base(object):
             'polymorphic',
             'hijack',
             'compat',
+            'sites_initial',
         )
 
     CACHES = {
@@ -104,6 +105,8 @@ class Base(object):
     LOGOUT_URL = 'logout'
 
     SESSION_COOKIE_DOMAIN = '.%sxenim.de' % phase
+
+    SESSION_COOKIE_NAME = '%ssessionid' % phase
 
     WSGI_APPLICATION = 'xenim.wsgi.application'
 

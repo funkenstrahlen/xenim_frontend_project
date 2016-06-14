@@ -209,8 +209,6 @@ class DevSettingsMixin(object):
 
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-    SESSION_COOKIE_DOMAIN = ''
-
     AMQP = False
 
     ROOT_HOSTCONF = 'xenim.hosts'
