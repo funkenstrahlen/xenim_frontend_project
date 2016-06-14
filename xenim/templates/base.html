@@ -14,7 +14,7 @@
 {% if phase %}
 <style>
 body, html {
-background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='80px' width='160px'><text x='0' y='80' fill='white' background='transparent' font-size='25' font-family='sans' font-weight='bold' transform='rotate(-30)'>staging</text></svg>");
+background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='80px' width='{% widthratio 21 1 phase|length %}px'><text x='0' y='80' fill='white' background='transparent' font-size='25' font-family='sans' font-weight='bold' transform='rotate(-30)'>{{ phase|slice:":-1" }}</text></svg>");
 }
 </style>
 {% endif %}
