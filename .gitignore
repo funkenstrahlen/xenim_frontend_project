@@ -1,0 +1,3 @@
+dev.sqlite
+hosts_local.py
+xenim/settings/*_local.py
