@@ -14,7 +14,7 @@ Then install everything with:
     git clone git@github.com:xenim/xenim_frontend_project.git
     cd xenim_frontend_project
     pip install -r requirements-dev.txt
-    python manage.py initconfig
+    ./initconfig.sh
 
 Configuration
 -------------
