@@ -1,6 +1,6 @@
 from django_hosts import patterns, host
 
-import hosts_common import host_patterns
+from hosts_common import host_patterns
 from settings.deployment import phase
 
 main_pattern = patterns('',
