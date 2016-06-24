@@ -232,6 +232,9 @@ class DevSettingsMixin(object):
 class DevDashboardSettings(DevSettingsMixin, DebugToolBar, DashboardSettingsBase):
     pass
 
+class Dev2DashboardSettings(Amqp, DevSettingsMixin, DebugToolBar, DashboardSettingsBase):
+    AMQP = True
+
 class DevWWWSettings(DevSettingsMixin, WWWSettingsBase):
     pass
 

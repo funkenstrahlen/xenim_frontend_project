@@ -161,3 +161,5 @@ class Base(object):
         }
     }
     THUMBNAIL_CACHE_DIMENSIONS = True
+
+    TEST_STREAM_URL = "http://stream.hoerradar.de/detektorfm-musik-mp3-128"
