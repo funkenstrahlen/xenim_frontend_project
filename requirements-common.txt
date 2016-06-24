@@ -27,3 +27,4 @@ django-polymorphic==0.7.1
 django-hijack==1.0.9
 raven==5.8.1
 lxml==3.5.0
+django-compressor==2.0

@@ -91,13 +91,24 @@ class Base(object):
             'hijack',
             'compat',
             'sites_initial',
+            'compressor',
         )
+
+    COMPRESS_ENABLED = False
 
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
         }
     }
+
+    STATICFILES_FINDERS = (
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+        # other finders..
+        'compressor.finders.CompressorFinder',
+    )
+
 
     AUTH_PROFILE_MODULE = 'radioportal.UserProfile'
     LOGIN_REDIRECT_URL = '/'
