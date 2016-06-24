@@ -1,17 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de" class="no-js">
 {% load cache i18n extshorturl_tags hosts staticfiles hijack_tags compress %}
   <head>
     <title>streams.xenim.de{% block title %}{% endblock %}</title>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="{% static "design/favicon.png" %}" type="image/png" />
     <link rel="apple-touch-icon" href="{% static "design/favicon.png" %}" />
-    {% if not is_canonical %}<link rel="canonical" href="{{ canonical }}" />{% endif %}
+    {% if not is_canonical %}<link rel="shortlink" href="{{ canonical }}" />{% endif %}
     {% block head %}{% endblock %}
-    {% block shorturl_head %}<link rev="canonical" href="{% extshorturl %}" />{% endblock %}
+    {% block shorturl_head %}<link rel="shortlink" href="{% extshorturl %}" />{% endblock %}
     {% compress css %}
     {% block head_css %}{% endblock %}
+    <link rel="stylesheet" href="{% static "xenim/css/app.css" %}" />
     <link rel="stylesheet" type="text/css" href="{% static "design/main.css" %}" />
+
+
 {% if phase %}
 <style>
 body, html {
@@ -40,7 +46,7 @@ background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/200
 	</span>
 {% endif %}
     </div>
-    <div id="navigation">
+    <div id="navigation" class="large-5 large-centered">
 	    <ul>
                 {% host_url "root" on "www" as root_var %}
 	        <li{% ifequal request.path root_var %} class="active"{% endifequal %}>
@@ -61,21 +67,20 @@ background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/200
 			{% endif %}
 	    </ul>
     </div>
-    <div id="content" {% block content_class %}{% endblock %}>
-	  {% block breadcrumb_div %}
-	  <div id="sub_navigation">
-      <div id="breadcrumb">
-         {% block breadcrumb %}{% endblock %}
+    <div id="content" class="{% block content_class %}{% endblock %}large-5 large-centered">
+      {% block breadcrumb_div %}
+      <div class="clearfix">
+        <span class="float-left">
+           {% block breadcrumb %}{% endblock %}
+        </span>
+        <span id="shorturl" class="float-right">{% block shorturl_footer %}{% extshorturl %}{% endblock %}</span>
       </div>
-   	  <div id="shorturl">{% block shorturl_footer %}{% extshorturl %}{% endblock %}</div>
-      <span class="clear" />
-      </div>
-	  {% endblock %}
+      {% endblock %}
       {% block content %}{% endblock %}
       {% block content_foot %}{% endblock %}
     </div>
 
-	<div id="footer">
+	<div id="footer" class="large-3 large-centered small-11 small-centered">
 		<ul>
 			{% if user.is_staff %}
 			<li><a href="{% host_url "admin:index" on "dashboard" %}">Django Admin</a></li>
@@ -93,6 +98,10 @@ background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/200
                         <li><a href="http://flattr.com/thing/2852/xenim-streaming" target="_blank"><img src="{% static "design/flattr-badge-large.png" %}" alt="Flattr this" title="Flattr this" border="0" /></a></li>
 		</ul>
 	</div>
+    <script src="{% static "xenim/bower_components/foundation-sites/dist/foundation.min.js" %}"></script>
+    <script>
+      $(document).foundation();
+    </script>
 
   </body>
 </html>

@@ -21,19 +21,9 @@ html, body, #headline {
 /** Navigation */
 #navigation {
 	padding: 0 1em;
-	max-width: 40em;
 	text-align: center;
-	line-height: 3em;
-	margin: 0 auto;
-	/*background-color: #84B22d;*/
-	/*background-color: #FAFAFA;*/
-	/*background-color: #EAEAEA;*/
-	/*background-color: #4282D3;*/
-/*	-webkit-border-top-left-radius: 1em;
-	-webkit-border-top-right-radius: 1em;
-	-moz-border-radius-topleft: 1em;
-	-moz-border-radius-topright: 1em;
-*/	border-top-left-radius: 1em;
+
+	border-top-left-radius: 1em;
 	border-top-right-radius: 1em;
 	border: 2px solid #6887bb;
 	border-bottom: none;
@@ -41,6 +31,7 @@ html, body, #headline {
 
 #navigation ul {
 	list-style-type: none;
+	line-height: 3em;
 	margin: 0px;
 	padding: 0;
 }
@@ -59,50 +50,24 @@ html, body, #headline {
 	font-weight: bold;
 }
 /** Subnavigation */
-#sub_navigation {
-	height: 1em;
-}
-
-#breadcrumb {
-	float: left;
-}
-
 #shorturl {
-	float: right;
 	font-family: monospace;
 	font-size: 0.9em;
 	border: 1px solid #ccc;
 	padding: 0.5em;
 }
 
-.clear {
-	clear: both;
-}
-
 /** Content */
 #content {
 	padding: 1em 2em;
 	min-height: 15em;
-	margin: 0 auto;
-	max-width: 38em;
-	/*background-color: #C7F66F; */
-	/*background-color: #FAFAFA;*/
-	/*background-color: #EAEAEA;*/
 	background-color: #6997D3;
-/*	-webkit-border-bottom-right-radius: 1em;
-	-webkit-border-bottom-left-radius: 1em;
-	-moz-border-radius-bottomright: 1em;
-	-moz-border-radius-bottomleft: 1em;*/
 	border-bottom-right-radius: 1em;
 	border-bottom-left-radius: 1em;
 	border: 2px solid #6887bb;
 	border-top: none;
 	color: #222;
 }
-
-/*#content h2 {
-	text-align: center;
-}*/
 
 #content h3 {
 	margin-bottom: 0;
@@ -122,19 +87,10 @@ html, body, #headline {
 
 /** Footer */
 #footer {
-	margin: 0 auto;
-	max-width: 40em;
 	text-align: center;
 	line-height: 2em;
 	margin-bottom: 1em;
 	font-size: 0.8em;
-	/*background-color: #FAFAFA;*/
-	/*background-color: #84B22d;*/
-	/*background-color: #EAEAEA;*/
-/*	-webkit-border-bottom-right-radius: 1em;
-	-webkit-border-bottom-left-radius: 1em;
-	-moz-border-radius-bottomright: 1em;
-	-moz-border-radius-bottomleft: 1em;*/
 	border-bottom-right-radius: 1em;
 	border-bottom-left-radius: 1em;
 }
