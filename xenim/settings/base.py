@@ -134,16 +134,20 @@ class Base(object):
 
     THUMBNAIL_ALIASES = {
         '': {
-            'app-1x': {
-                'size': (60, 60),
-                'crop': 'smart',
-            },
-            'app-2x': {
-                'size': (120, 120),
-                'crop': 'smart',
-            },
-            'app-3x': {
+            'v1-v2-app-3x': {
                 'size': (180, 180),
+                'crop': 'smart',
+            },
+            'v2-app-800': {
+                'size': (800, 800),
+                'crop': 'smart',
+            },
+            'v2-app-1600': {
+                'size': (1600, 1600),
+                'crop': 'smart',
+            },
+            'v2-app-3000': {
+                'size': (3000, 3000),
                 'crop': 'smart',
             },
             'listing': {
