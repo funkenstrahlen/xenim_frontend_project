@@ -3,7 +3,7 @@ Quickstart
 
 Install all necessary packages and headers, for Debian this should be sufficient:
 
-    apt-get install libxml2-dev libxslt1-dev zlib1g-dev build-essential python-dev libssl1.0.0 libffi-dev libssl-dev python-psycopg2 libpq-dev python-virtualenv libjpeg-dev zlib1g-dev
+    apt-get install libxml2-dev libxslt1-dev zlib1g-dev build-essential python-dev libssl1.0.0 libffi-dev libssl-dev python-psycopg2 libpq-dev python-virtualenv libjpeg-dev zlib1g-dev git pwgen
 
 Then install everything with:
 
