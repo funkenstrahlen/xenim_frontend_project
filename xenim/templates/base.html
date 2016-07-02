@@ -64,38 +64,40 @@ background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/200
 </div>
 
 <div class="row">
-  <div class="small-12">{% block messages %}{% endblock %}</div>
+  <div class="small-12 columns">{% block messages %}{% endblock %}</div>
 </div>
 
 
 <div class="row">
-  <div class="{% block content_class %}{% endblock %} small-12 medium-10 medium-centered">
+  <div class="{% block content_class %}{% endblock %} small-12 medium-10 columns medium-centered">
       {% block content %}{% endblock %}
     </div>
 </div>
     
 
-<div class="row small-12">
-  <ul class="menu">
-    {% host_url "news-list" on "www" as news_var %}
-    <li{% ifequal request.path news_var %} class="active"{% endifequal %}>
-        <a href="{{ news_var }}">{% trans "News" %}</a>
-    </li>
-    <li{% ifequal request.path "/about/" %} class="active"{% endifequal %}>
-      <a href="/about/">{% trans "About" %}</a>
-    </li>
-    {% if user.is_authenticated %}
-    <li>
-      <a href="{% host_url "wiki-page" page="start" on "wiki" %}">Wiki</a>
-    </li>
-    {% endif %}
-    {% if user.is_staff %}
-    <li><a href="{% host_url "admin:index" on "dashboard" %}">Django Admin</a></li>
-    {% endif %}
-    <li><a href="http://status.xenim.de/">Status</a></li>
-    <li><a href="/impressum/">Impressum</a></li>
-    <li><a href="http://flattr.com/thing/2852/xenim-streaming" target="_blank"><img src="{% static "design/flattr-badge-large.png" %}" alt="Flattr this" title="Flattr this" border="0" /></a></li>
-  </ul>
+<div class="row">
+  <div class="small-12 columns"> 
+    <ul class="menu">
+      {% host_url "news-list" on "www" as news_var %}
+      <li{% ifequal request.path news_var %} class="active"{% endifequal %}>
+          <a href="{{ news_var }}">{% trans "News" %}</a>
+      </li>
+      <li{% ifequal request.path "/about/" %} class="active"{% endifequal %}>
+        <a href="/about/">{% trans "About" %}</a>
+      </li>
+      {% if user.is_authenticated %}
+      <li>
+        <a href="{% host_url "wiki-page" page="start" on "wiki" %}">Wiki</a>
+      </li>
+      {% endif %}
+      {% if user.is_staff %}
+      <li><a href="{% host_url "admin:index" on "dashboard" %}">Django Admin</a></li>
+      {% endif %}
+      <li><a href="http://status.xenim.de/">Status</a></li>
+      <li><a href="/impressum/">Impressum</a></li>
+      <li><a href="http://flattr.com/thing/2852/xenim-streaming" target="_blank"><img src="{% static "design/flattr-badge-large.png" %}" alt="Flattr this" title="Flattr this" border="0" /></a></li>
+    </ul>
+  </div>
 </div>
 
 
