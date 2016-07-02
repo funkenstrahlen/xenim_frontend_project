@@ -15,16 +15,19 @@
     {% compress css %}
     {% block head_css %}{% endblock %}
     <link rel="stylesheet" href="{% static "xenim/css/app.css" %}" />
-    <link rel="stylesheet" type="text/css" href="{% static "design/main.css" %}" />
-
 
 {% if phase %}
-<style>
+<!-- <style>
 body, html {
 background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='80px' width='{% widthratio 21 1 phase|length %}px'><text x='0' y='80' fill='white' background='transparent' font-size='25' font-family='sans' font-weight='bold' transform='rotate(-30)'>{{ phase|slice:":-1" }}</text></svg>");
 }
-</style>
+</style> -->
 {% endif %}
+
+
+
+
+
 {% endcompress %}
 {% compress js %}  
     {% block head_js %}{% endblock %}
@@ -32,72 +35,70 @@ background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/200
   </head>
   <body>
 {{ request|hijackNotification }}
-{% block messages %}{% endblock %}
-    <div id="headline">
-      <h1>xenim streaming network</h1>
-    <span id="twitter" style="position: absolute; top: 0.5em; right: 1em;">
-    	<a href="http://twitter.com/xenim">
-    		<img src="{% static "design/twitter.png" %}" alt="twitter bird" />
-    	</a>
-    </span>
-{% if user.is_authenticated %}
-	<span id="loggedin" style="position: absolute; top: 0.5em; left: 1em; width: 5em; line-height: 1.5em;">
-		{% trans "You are logged in as" %} <a href="{% host_url "dashboard" on "dashboard" %}">{{ user }}</a>
-	</span>
-{% endif %}
-    </div>
-    <div id="navigation" class="large-5 large-centered">
-	    <ul>
-                {% host_url "root" on "www" as root_var %}
-	        <li{% ifequal request.path root_var %} class="active"{% endifequal %}>
-		          <a href="{{ root_var }}">{% trans "Home" %}</a>
-	        </li>
-	        {% block navigation %}{% endblock %}
-                {% host_url "news-list" on "www" as news_var %}
-	        <li{% ifequal request.path news_var %} class="active"{% endifequal %}>
-		          <a href="{{ news_var }}">{% trans "News" %}</a>
-	        </li>
-	        <li{% ifequal request.path "/about/" %} class="active"{% endifequal %}>
-	          <a href="/about/">{% trans "About" %}</a>
-	        </li>	        
-			{% if user.is_authenticated %}
-			<li>
-				<a href="{% host_url "wiki-page" page="start" on "wiki" %}">Wiki</a>
-			</li>
-			{% endif %}
-	    </ul>
-    </div>
-    <div id="content" class="{% block content_class %}{% endblock %}large-5 large-centered">
-      {% block breadcrumb_div %}
-      <div class="clearfix">
-        <span class="float-left">
-           {% block breadcrumb %}{% endblock %}
-        </span>
-        <span id="shorturl" class="float-right">{% block shorturl_footer %}{% extshorturl %}{% endblock %}</span>
-      </div>
-      {% endblock %}
-      {% block content %}{% endblock %}
-      {% block content_foot %}{% endblock %}
-    </div>
 
-	<div id="footer" class="large-3 large-centered small-11 small-centered">
-		<ul>
-			{% if user.is_staff %}
-			<li><a href="{% host_url "admin:index" on "dashboard" %}">Django Admin</a></li>
-			{% endif %}
-			<li>
-				{% if user.is_authenticated %}
-				<a href="{% host_url "logout" on "dashboard" %}">Logout ({{ user.username }})</a>
-				{% else %}
-				<a href="{% host_url "login" on "dashboard" %}">Login</a>
-				{% endif %}			
-			</li>
-			{% block feed_footer %}{% endblock %}
-                        <li><a href="http://status.xenim.de/">Status</a></li>
-                        <li><a href="/impressum/">Impressum</a></li>
-                        <li><a href="http://flattr.com/thing/2852/xenim-streaming" target="_blank"><img src="{% static "design/flattr-badge-large.png" %}" alt="Flattr this" title="Flattr this" border="0" /></a></li>
-		</ul>
-	</div>
+
+
+
+<div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="menu">
+    <li class="menu-text">Xenim</li>
+      {% host_url "root" on "www" as root_var %}
+      <li{% ifequal request.path root_var %} class="active"{% endifequal %}>
+          <a href="{{ root_var }}">{% trans "Home" %}</a>
+      </li>
+      {% block navigation %}{% endblock %}
+    </ul>
+  </div>
+  <div class="top-bar-right">
+    <ul class="menu">
+      <li>
+        {% if user.is_authenticated %}
+        <a href="{% host_url "logout" on "dashboard" %}">Logout {{ user.username }}</a>
+        {% else %}
+        <a href="{% host_url "login" on "dashboard" %}">Login</a>
+        {% endif %}     
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12">{% block messages %}{% endblock %}</div>
+</div>
+
+
+<div class="row">
+  <div class="{% block content_class %}{% endblock %} small-12 medium-10 medium-centered">
+      {% block content %}{% endblock %}
+    </div>
+</div>
+    
+
+<div class="row small-12">
+  <ul class="menu">
+    {% host_url "news-list" on "www" as news_var %}
+    <li{% ifequal request.path news_var %} class="active"{% endifequal %}>
+        <a href="{{ news_var }}">{% trans "News" %}</a>
+    </li>
+    <li{% ifequal request.path "/about/" %} class="active"{% endifequal %}>
+      <a href="/about/">{% trans "About" %}</a>
+    </li>
+    {% if user.is_authenticated %}
+    <li>
+      <a href="{% host_url "wiki-page" page="start" on "wiki" %}">Wiki</a>
+    </li>
+    {% endif %}
+    {% if user.is_staff %}
+    <li><a href="{% host_url "admin:index" on "dashboard" %}">Django Admin</a></li>
+    {% endif %}
+    <li><a href="http://status.xenim.de/">Status</a></li>
+    <li><a href="/impressum/">Impressum</a></li>
+    <li><a href="http://flattr.com/thing/2852/xenim-streaming" target="_blank"><img src="{% static "design/flattr-badge-large.png" %}" alt="Flattr this" title="Flattr this" border="0" /></a></li>
+  </ul>
+</div>
+
+
     <script src="{% static "xenim/bower_components/foundation-sites/dist/foundation.min.js" %}"></script>
     <script>
       $(document).foundation();
