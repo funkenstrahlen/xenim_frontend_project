@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block title %} &middot; {{ flatpage.title }}{% endblock %}
 {% block content %}
- {% load markup_tags %}
-{{ flatpage.content|apply_markup:"markdown" }}
+<div class="row">
+	<div class="small-12 columns">
+		{% load markup_tags %}
+		{{ flatpage.content|apply_markup:"markdown" }}
+	</div>
+</div>
 {% endblock %}
