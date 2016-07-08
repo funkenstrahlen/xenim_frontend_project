@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="{% static "xenim/css/app.css" %}" />
     {% endcompress %}
 
-    {% compress js %}  
+    {% compress js %}
+        <script src="https://use.fontawesome.com/f2954081ab.js"></script> 
         {% block head_js %}{% endblock %}
     {% endcompress %}
 
@@ -34,43 +35,42 @@
       {% host_url "shows" on "www" as show_url %}
       {% host_url "root" on "www" as root_var %}
       <li{% ifequal request.path root_var %} class="active"{% endifequal %}>
-          <a href="{{ root_var }}">{% trans "Home" %}</a>
+          <a href="{{ root_var }}"><i class="fa fa-home" aria-hidden="true"></i> {% trans "Home" %}</a>
       </li>
-      <li><a href="#">Kalender</a></li>
+      <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> Kalender</a></li>
 
       <li{% if request.path|startswith:show_url %} class="active"{% endif %}>
-        <a class="{% block collapsed_shows %}{% endblock %}collapsed" href="http:{{ show_url }}">{% trans "Archive" %}</a>
+        <a class="{% block collapsed_shows %}{% endblock %}collapsed" href="http:{{ show_url }}"><i class="fa fa-archive" aria-hidden="true"></i> {% trans "Archive" %}</a>
       </li>
       {% host_url "news-list" on "www" as news_var %}
       <li{% ifequal request.path news_var %} class="active"{% endifequal %}>
-          <a href="{{ news_var }}">{% trans "News" %}</a>
+          <a href="{{ news_var }}"><i class="fa fa-newspaper-o" aria-hidden="true"></i> {% trans "News" %}</a>
       </li>
 
       <li{% ifequal request.path "/about/" %} class="active"{% endifequal %}>
-        <a href="/about/">{% trans "About" %}</a>
+        <a href="/about/"><i class="fa fa-info" aria-hidden="true"></i> {% trans "About" %}</a>
       </li>
 
-      <li><a href="#">Kontakt</a></li>
     </ul>
   </div>
   <div class="top-bar-right">
     <ul class="dropdown menu" data-dropdown-menu>
       <li>
       {% if request.user.is_superuser or user.is_staff or perms.portal.add_channel or perms.portal.add_show %}
-      Admin
+      <i class="fa fa-wrench" aria-hidden="true"></i> Admin
       <ul class="menu">
           {% if request.user.is_superuser %}
-          <li><a href="{% host_url "admin-list-users" on "dashboard" %}">{% trans "List of Users" %}</a></li>
-          <li><a href="{% host_url "admin-wizard" on "dashboard" %}">{% trans "Create new User, Show, Channel and Stream" %}</a></li>
+          <li><a href="{% host_url "admin-list-users" on "dashboard" %}"><i class="fa fa-users" aria-hidden="true"></i> {% trans "List of Users" %}</a></li>
+          <li><a href="{% host_url "admin-wizard" on "dashboard" %}"><i class="fa fa-plus" aria-hidden="true"></i> {% trans "Create new User, Show, Channel and Stream" %}</a></li>
           {% endif %}
           {% if user.is_staff %}
-              <li><a href="{% host_url "admin:index" on "dashboard" %}">Django Admin</a></li>
+              <li><a href="{% host_url "admin:index" on "dashboard" %}"><i class="fa fa-wrench" aria-hidden="true"></i> Django Admin</a></li>
           {% endif %}
           {% if perms.portal.add_channel %}
-            <li><a href="{% host_url "admin-channel-create" on "dashboard" %}">{% trans "Create new Channel" %}</a></li>
+            <li><a href="{% host_url "admin-channel-create" on "dashboard" %}"><i class="fa fa-plus" aria-hidden="true"></i> {% trans "Create new Channel" %}</a></li>
           {% endif %}
           {% if perms.portal.add_show %}
-            <li><a href="{% host_url "admin-show-create" on "dashboard" %}">{% trans "Create new Show" %}</a></li>
+            <li><a href="{% host_url "admin-show-create" on "dashboard" %}"><i class="fa fa-plus" aria-hidden="true"></i> {% trans "Create new Show" %}</a></li>
           {% endif %} 
         </ul>
       {% endif %}
@@ -80,27 +80,31 @@
       {% if user.is_authenticated %}
         {% host_url "dashboard" on "dashboard" as profile_url %}
         <li{% if request.path|startswith:profile_url %} class="active"{% endif %}>
-          <a href="{% host_url "dashboard" on "dashboard" %}">{% trans "Dashboard" %}</a>
+          <a href="{% host_url "dashboard" on "dashboard" %}"><i class="fa fa-cog" aria-hidden="true"></i> {% trans "Dashboard" %}</a>
           {% block navi_account %}{% endblock %}
         </li>
       {% endif %}
 
       {% if user.is_authenticated %}
-        <li>
-          <a href="{% host_url "wiki-page" page="start" on "wiki" %}">Doku</a>
-        </li>
+      <li>
+          <i class="fa fa-question" aria-hidden="true"></i> Support
+          <ul class="menu">
+            <li><a href="{% host_url "wiki-page" page="start" on "wiki" %}"><i class="fa fa-book" aria-hidden="true"></i> Doku</a></li>
+            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i> Kontakt</a></li>
+          </ul>    
+      </li>
       {% endif %}
 
 
       <li>
         {% if user.is_authenticated %}
-        {{ user.username }}
-        <ul class="menu">
-          <li><a href="{% host_url "logout" on "dashboard" %}">Logout </a></li>
-          <li><a href="{% host_url "django.contrib.auth.views.password_change" on "dashboard" %}">{% trans "Change Password" %}</a></li>
-        </ul>
+          <i class="fa fa-user" aria-hidden="true"></i> {{ user.username }}
+          <ul class="menu">
+            <li><a href="{% host_url "logout" on "dashboard" %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+            <li><a href="{% host_url "django.contrib.auth.views.password_change" on "dashboard" %}"><i class="fa fa-key" aria-hidden="true"></i> {% trans "Change Password" %}</a></li>
+          </ul>
         {% else %}
-        <a href="{% host_url "login" on "dashboard" %}">Login</a>
+          <a href="{% host_url "login" on "dashboard" %}"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
         {% endif %}     
       </li>
     </ul>
@@ -134,7 +138,9 @@
         <a  href="{{ stat_url }}">{% trans "Statistics" %}</a>
         {% block navi_stats %}{% endblock %}
       </li>{% endcomment %}
-      <li><a href="#">Twitter</a></li>
+      <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>
+ Kontakt</a></li>
+      <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a></li>
       <li><a href="http://status.xenim.de/">Status</a></li>
       <li><a href="/impressum/">Impressum</a></li>
       <li><a href="http://flattr.com/thing/2852/xenim-streaming" target="_blank">Flattr</a></li>
