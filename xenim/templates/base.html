@@ -132,25 +132,33 @@
 
 {% block content %}{% endblock %}
 
-
-<hr>
-<div class="row">
-  <div class="small-12 columns"> 
-    <ul class="menu">
-      {% comment %}{% host_url "statistic" on "www" as stat_url %}
-      <li{% if request.path|startswith:stat_url %} class="active"{% endif %}>
-        <a  href="{{ stat_url }}">{% trans "Statistics" %}</a>
-        {% block navi_stats %}{% endblock %}
-      </li>{% endcomment %}
-      <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>
- Kontakt</a></li>
-      <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a></li>
-      <li><a href="http://status.xenim.de/">Status</a></li>
-      <li><a href="/impressum/">Impressum</a></li>
-      <li><a href="http://flattr.com/thing/2852/xenim-streaming" target="_blank">Flattr</a></li>
-    </ul>
+<footer>
+  <hr>
+  <div class="row">
+    <div class="small-12 columns"> 
+      <ul class="menu">
+        {% comment %}{% host_url "statistic" on "www" as stat_url %}
+        <li{% if request.path|startswith:stat_url %} class="active"{% endif %}>
+          <a  href="{{ stat_url }}">{% trans "Statistics" %}</a>
+          {% block navi_stats %}{% endblock %}
+        </li>{% endcomment %}
+        <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>
+   Kontakt</a></li>
+         {% host_url "news-list" on "www" as news_var %}
+        <li{% ifequal request.path news_var %} class="active"{% endifequal %}>
+            <a href="{{ news_var }}"><i class="fa fa-newspaper-o" aria-hidden="true"></i> {% trans "News" %}</a>
+        </li>
+        <li{% ifequal request.path "/about/" %} class="active"{% endifequal %}>
+          <a href="/about/"><i class="fa fa-info" aria-hidden="true"></i> {% trans "About" %}</a>
+        </li>
+        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a></li>
+        <li><a href="http://status.xenim.de/"><i class="fa fa-cog" aria-hidden="true"></i> Status</a></li>
+        <li><a href="/impressum/">Impressum</a></li>
+        <li><a href="http://flattr.com/thing/2852/xenim-streaming" target="_blank">Flattr</a></li>
+      </ul>
+    </div>
   </div>
-</div>
+</footer>
 
 
 {% compress js %}  
