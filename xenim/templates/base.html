@@ -45,14 +45,7 @@
       <li{% if request.path|startswith:show_url %} class="active"{% endif %}>
         <a class="{% block collapsed_shows %}{% endblock %}collapsed" href="http:{{ show_url }}"><i class="fa fa-archive" aria-hidden="true"></i> {% trans "Archive" %}</a>
       </li>
-      {% host_url "news-list" on "www" as news_var %}
-      <li{% ifequal request.path news_var %} class="active"{% endifequal %}>
-          <a href="{{ news_var }}"><i class="fa fa-newspaper-o" aria-hidden="true"></i> {% trans "News" %}</a>
-      </li>
-
-      <li{% ifequal request.path "/about/" %} class="active"{% endifequal %}>
-        <a href="/about/"><i class="fa fa-info" aria-hidden="true"></i> {% trans "About" %}</a>
-      </li>
+      <li><a href=""><i class="fa fa-list" aria-hidden="true"></i> Shows</a></li>
 
     </ul>
   </div>
