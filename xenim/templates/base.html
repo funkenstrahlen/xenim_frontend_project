@@ -26,6 +26,10 @@
   </head>
   <body>
 
+
+
+
+
 {% block navigation %}
 <div class="top-bar">
   <div class="top-bar-left">
@@ -55,26 +59,26 @@
   </div>
   <div class="top-bar-right">
     <ul class="dropdown menu" data-dropdown-menu>
-      <li>
       {% if request.user.is_superuser or user.is_staff or perms.portal.add_channel or perms.portal.add_show %}
-      <i class="fa fa-wrench" aria-hidden="true"></i> Admin
-      <ul class="menu">
-          {% if request.user.is_superuser %}
-          <li><a href="{% host_url "admin-list-users" on "dashboard" %}"><i class="fa fa-users" aria-hidden="true"></i> {% trans "List of Users" %}</a></li>
-          <li><a href="{% host_url "admin-wizard" on "dashboard" %}"><i class="fa fa-plus" aria-hidden="true"></i> {% trans "Create new User, Show, Channel and Stream" %}</a></li>
-          {% endif %}
-          {% if user.is_staff %}
-              <li><a href="{% host_url "admin:index" on "dashboard" %}"><i class="fa fa-wrench" aria-hidden="true"></i> Django Admin</a></li>
-          {% endif %}
-          {% if perms.portal.add_channel %}
-            <li><a href="{% host_url "admin-channel-create" on "dashboard" %}"><i class="fa fa-plus" aria-hidden="true"></i> {% trans "Create new Channel" %}</a></li>
-          {% endif %}
-          {% if perms.portal.add_show %}
-            <li><a href="{% host_url "admin-show-create" on "dashboard" %}"><i class="fa fa-plus" aria-hidden="true"></i> {% trans "Create new Show" %}</a></li>
-          {% endif %} 
+      <li>
+        <a href="#"><i class="fa fa-wrench" aria-hidden="true"></i> Admin</a>
+        <ul class="menu vertical">
+            {% if request.user.is_superuser %}
+            <li><a href="{% host_url "admin-list-users" on "dashboard" %}"><i class="fa fa-users" aria-hidden="true"></i> {% trans "List of Users" %}</a></li>
+            <li><a href="{% host_url "admin-wizard" on "dashboard" %}"><i class="fa fa-plus" aria-hidden="true"></i> {% trans "Create new User, Show, Channel and Stream" %}</a></li>
+            {% endif %}
+            {% if user.is_staff %}
+                <li><a href="{% host_url "admin:index" on "dashboard" %}"><i class="fa fa-wrench" aria-hidden="true"></i> Django Admin</a></li>
+            {% endif %}
+            {% if perms.portal.add_channel %}
+              <li><a href="{% host_url "admin-channel-create" on "dashboard" %}"><i class="fa fa-plus" aria-hidden="true"></i> {% trans "Create new Channel" %}</a></li>
+            {% endif %}
+            {% if perms.portal.add_show %}
+              <li><a href="{% host_url "admin-show-create" on "dashboard" %}"><i class="fa fa-plus" aria-hidden="true"></i> {% trans "Create new Show" %}</a></li>
+            {% endif %} 
         </ul>
-      {% endif %}
       </li>
+      {% endif %}
 
 
       {% if user.is_authenticated %}
@@ -87,8 +91,8 @@
 
       {% if user.is_authenticated %}
       <li>
-          <i class="fa fa-question" aria-hidden="true"></i> Support
-          <ul class="menu">
+          <a href="#"><i class="fa fa-question" aria-hidden="true"></i> Support</a> 
+          <ul class="menu vertical">
             <li><a href="{% host_url "wiki-page" page="start" on "wiki" %}"><i class="fa fa-book" aria-hidden="true"></i> Doku</a></li>
             <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i> Kontakt</a></li>
           </ul>    
@@ -98,8 +102,8 @@
 
       <li>
         {% if user.is_authenticated %}
-          <i class="fa fa-user" aria-hidden="true"></i> {{ user.username }}
-          <ul class="menu">
+          <a href="#"><i class="fa fa-user" aria-hidden="true"></i> {{ user.username }}</a>
+          <ul class="menu vertical">
             <li><a href="{% host_url "logout" on "dashboard" %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
             <li><a href="{% host_url "django.contrib.auth.views.password_change" on "dashboard" %}"><i class="fa fa-key" aria-hidden="true"></i> {% trans "Change Password" %}</a></li>
           </ul>

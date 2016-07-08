@@ -13,4 +13,9 @@
 
 .top-bar {
 	margin-bottom: 1em;
+	li a {
+		&:hover {
+			background-color: scale-color($topbar-background, $lightness: +15%);
+		}
+	}
 }
