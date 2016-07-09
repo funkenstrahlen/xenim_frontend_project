@@ -23,3 +23,18 @@
 footer {
 	margin-bottom: 2em;
 }
+
+
+// change background color if this is a development machine
+
+body.develop-dev {
+	background-color: gray;
+}
+
+body.develop-demo {
+	background-color: gray;
+}
+
+body.develop-test {
+	background-color: gray;
+}

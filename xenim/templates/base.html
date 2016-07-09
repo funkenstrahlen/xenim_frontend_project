@@ -23,7 +23,7 @@
     {% endcompress %}
 
   </head>
-  <body>
+  <body {% if phase %} class="develop-{{ phase|slice:":-1" }}" {% endif %}>
 
 
 
