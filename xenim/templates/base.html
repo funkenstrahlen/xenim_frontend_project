@@ -35,15 +35,14 @@
     <ul class="menu">
     <li class="menu-text">Xenim</li>
       {% load i18n hosts %}
-      {% host_url "archive" on "www" as archive_url %}
       {% host_url "root" on "www" as root_var %}
       <li{% ifequal request.path root_var %} class="active"{% endifequal %}>
           <a href="{{ root_var }}"><i class="fa fa-home" aria-hidden="true"></i> {% trans "Home" %}</a>
       </li>
       <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i> Kalender</a></li>
 
-      <li{% if request.path|startswith:archive_url %} class="active"{% endif %}>
-        <a class="{% block collapsed_shows %}{% endblock %}collapsed" href="http:{{ archive_url }}"><i class="fa fa-archive" aria-hidden="true"></i> {% trans "Archive" %}</a>
+      <li{% if request.path|startswith:archive %} class="active"{% endif %}>
+        <a class="{% block collapsed_shows %}{% endblock %}collapsed" href="http:{{ archive }}"><i class="fa fa-archive" aria-hidden="true"></i> {% trans "Archive" %}</a>
       </li>
       <li><a href=""><i class="fa fa-list" aria-hidden="true"></i> Shows</a></li>
 
