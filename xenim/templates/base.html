@@ -39,8 +39,8 @@
       <li{% ifequal request.path root_var %} class="active"{% endifequal %}>
           <a href="{{ root_var }}"><i class="fa fa-home" aria-hidden="true"></i> {% trans "Home" %}</a>
       </li>
-      <li><a href="{% host_url 'recent' on 'www' %}"><i class="fa fa-calendar" aria-hidden="true"></i> Sendeplan</a></li>
-      <li><a href="{% host_url 'show_list' on 'www' %}"><i class="fa fa-list" aria-hidden="true"></i> Podcasts</a></li>
+      <li><a href="{% host_url 'calendar' on 'www' %}"><i class="fa fa-calendar" aria-hidden="true"></i> Sendeplan</a></li>
+      <li><a href="{% host_url 'podcast_list' on 'www' %}"><i class="fa fa-list" aria-hidden="true"></i> Podcasts</a></li>
 
     </ul>
   </div>
