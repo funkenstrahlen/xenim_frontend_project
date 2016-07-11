@@ -123,7 +123,7 @@
   <hr>
   <div class="row">
     <div class="small-12 columns"> 
-      <ul class="menu">
+      <ul class="menu vertical medium-horizontal">
         {% comment %}{% host_url "statistic" on "www" as stat_url %}
         <li{% if request.path|startswith:stat_url %} class="active"{% endif %}>
           <a  href="{{ stat_url }}"><span>{% trans "Statistics" %}</span></a>
