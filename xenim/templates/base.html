@@ -30,7 +30,13 @@
 
 
 {% block navigation %}
-<div class="top-bar">
+
+<div class="title-bar" data-responsive-toggle="topbar" data-hide-for="medium">
+  <button class="menu-icon" type="button" data-toggle></button>
+  <div class="title-bar-title">Menu</div>
+</div>
+
+<div class="top-bar" id="topbar">
   <div class="top-bar-left">
     <ul class="menu">
     <li class="menu-text">Xenim</li>
