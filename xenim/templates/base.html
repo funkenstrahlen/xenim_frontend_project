@@ -60,15 +60,15 @@
             <li><a href="{% host_url "admin-list-users" on "dashboard" %}"><i class="fa fa-users" aria-hidden="true"></i> <span>{% trans "List of Users" %}</span></a></li>
             <li><a href="{% host_url "admin-wizard" on "dashboard" %}"><i class="fa fa-plus" aria-hidden="true"></i> <span>{% trans "Create new User, Show, Channel and Stream" %}</span></a></li>
             {% endif %}
-            {% if user.is_staff %}
-                <li><a href="{% host_url "admin:index" on "dashboard" %}"><i class="fa fa-wrench" aria-hidden="true"></i> <span>Django Admin</span></a></li>
-            {% endif %}
             {% if perms.portal.add_channel %}
               <li><a href="{% host_url "admin-channel-create" on "dashboard" %}"><i class="fa fa-plus" aria-hidden="true"></i> <span>{% trans "Create new Channel" %}</span></a></li>
             {% endif %}
             {% if perms.portal.add_show %}
               <li><a href="{% host_url "admin-show-create" on "dashboard" %}"><i class="fa fa-plus" aria-hidden="true"></i> <span>{% trans "Create new Show" %}</span></a></li>
             {% endif %} 
+            {% if user.is_staff %}
+                <li><a href="{% host_url "admin:index" on "dashboard" %}"><i class="fa fa-wrench" aria-hidden="true"></i> <span>Django Admin</span></a></li>
+            {% endif %}
         </ul>
       </li>
       {% endif %}
