@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de" class="no-js">
 {% load cache i18n extshorturl_tags hosts staticfiles hijack_tags compress %}
   <head>
-    <title>streams.xenim.de{% block title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -10,7 +10,7 @@
     <link rel="icon" href="{% static "design/favicon.png" %}" type="image/png" />
     <link rel="apple-touch-icon" href="{% static "design/favicon.png" %}" />
     {% if not is_canonical %}<link rel="shortlink" href="{{ canonical }}" />{% endif %}
-    {% block shorturl_head %}<link rel="shortlink" href="{% extshorturl %}" />{% endblock %}
+    
     {% block head %}{% endblock %}
 
     {% compress css %}
